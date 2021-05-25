@@ -44,13 +44,6 @@ document.getElementById('searchButton').addEventListener('click', () => {
             </div>
           `
         })
-
-
-        // for debugging
-        maxTemps.forEach(temp => {
-          console.log(`${temp}\n`)
-        })
-        console.log(array)
       })
       .catch(err => console.error(err))
     })
