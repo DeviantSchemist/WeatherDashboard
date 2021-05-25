@@ -20,7 +20,6 @@ document.getElementById('searchButton').addEventListener('click', () => {
               temp: myMaxTemp,
               humidity: array[i-1].main.humidity
             })
-            // maxTemps.push(myMaxTemp)
             myMaxTemp = 0
           }
           if (array[i-1].main.temp_max > myMaxTemp) {
