@@ -1,5 +1,7 @@
 document.getElementById('weatherData').innerHTML = 'Weather Data Displays Here'
 
+let counter = 0
+
 document.getElementById('searchButton').addEventListener('click', () => {
   axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${document.getElementById('searchInput').value}&appid=94f8ea24d2c4cd33d640135d8ee0a8d9&units=imperial`)
   .then(response => {
@@ -7,6 +9,15 @@ document.getElementById('searchButton').addEventListener('click', () => {
     .then(response2 => {
       axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${response.data.name}&appid=94f8ea24d2c4cd33d640135d8ee0a8d9&units=imperial`)
       .then(response3 => {
+        if (counter > 5) {
+          counter = 0
+          document.getElementById('list').innerHTML = ''
+        }
+        document.getElementById('list').innerHTML += `
+          <a href="#" class="list-group-item list-group-item-action">${document.getElementById('searchInput').value}</a>
+        `
+        counter++
+
         document.getElementById('searchInput').value = ''
         document.getElementById('forecasts').innerHTML = '<h1>5-Day Forecast</h1>'
         let array = response3.data.list //array of 40 forecasts, each with a 3 hour interval
