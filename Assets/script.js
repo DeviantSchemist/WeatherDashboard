@@ -38,10 +38,14 @@ document.getElementById('searchButton').addEventListener('click', () => {
         forecasts.forEach(forecast => {
           document.getElementById('forecasts').innerHTML += `
             <div class="col">
-              <h1>${forecast.date}</h1>
-              <p>${forecast.weather}</p>
-              <p>Temp: ${forecast.temp}℉</p>
-              <p>Humidity: ${forecast.humidity}%</p>
+              <div class="card text-white bg-primary mb-3">
+                <div class="card-header">${forecast.date}</div>
+                <div class="card-body">
+                  <h5 class="card-title">${forecast.weather}</h5>
+                  <h5 class="card-title">Temp: ${forecast.temp}℉</h5>
+                  <h5 class="card-title">${forecast.humidity}%</h5>
+                </div>
+              </div>
             </div>
           `
         })
