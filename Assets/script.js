@@ -1,14 +1,14 @@
 document.getElementById('weatherData').innerHTML = 'Weather Data Displays Here'
 
 document.getElementById('searchButton').addEventListener('click', () => {
-  document.getElementById('searchInput').innerHTML = ''
-  document.getElementById('forecasts').innerHTML = ''
   axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${document.getElementById('searchInput').value}&appid=94f8ea24d2c4cd33d640135d8ee0a8d9&units=imperial`)
   .then(response => {
     axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${response.data.coord.lat}&lon=${response.data.coord.lon}&exclude=minutely,hourly,daily,alerts&appid=94f8ea24d2c4cd33d640135d8ee0a8d9&units=imperial`)
     .then(response2 => {
       axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${response.data.name}&appid=94f8ea24d2c4cd33d640135d8ee0a8d9&units=imperial`)
       .then(response3 => {
+        document.getElementById('searchInput').innerHTML = ''
+        document.getElementById('forecasts').innerHTML = '<h1>5-Day Forecast</h1>'
         let array = response3.data.list //array of 40 forecasts, each with a 3 hour interval
         let myMaxTemp, forecasts = []
         myMaxTemp = array[0].main.temp_max
