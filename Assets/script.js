@@ -1,4 +1,39 @@
-document.getElementById('weatherData').innerHTML = 'Weather Data Displays Here'
+let weatherData = JSON.parse(localStorage.getItem('wData')) || []
+let forecastData = JSON.parse(localStorage.getItem('forecastData')) || []
+
+console.log(weatherData)
+
+if (weatherData.length == 0 && forecastData.length == 0) {
+  document.getElementById('weatherData').innerHTML = 'Weather Data Displays Here'
+}
+
+if (weatherData.length != 0) {
+  document.getElementById('weatherData').innerHTML = `
+    <h1>${weatherData.weatherName}</h1>
+    <p>Temperature: ${weatherData.weatherTemp} ℉</p>
+    <p>Humidity: ${weatherData.weatherHumid}%</p>
+    <p>Wind Speed: ${weatherData.weatherSpeed} MPH</p>
+    <p>UV Index: ${weatherData.weatherUV}</p>
+  `
+}
+
+if (forecastData.length != 0) {
+  document.getElementById('forecasts').innerHTML = '<h1>5-Day Forecast</h1>'
+  forecastData.forEach(forecast => {
+    document.getElementById('forecasts').innerHTML += `
+      <div class="col">
+        <div class="card text-white bg-primary mb-3">
+          <div class="card-header">${forecast.date}</div>
+          <div class="card-body">
+            <h5 class="card-title">${forecast.weather}</h5>
+            <h5 class="card-title">Temp: ${forecast.temp}℉</h5>
+            <h5 class="card-title">${forecast.humidity}%</h5>
+          </div>
+        </div>
+      </div>
+    `
+  })
+}
 
 let counter = 0
 
@@ -59,6 +94,18 @@ document.getElementById('searchButton').addEventListener('click', () => {
             </div>
           `
         })
+
+        //places weather data into local storage
+        localStorage.setItem('wData', JSON.stringify({
+          weatherName: response.data.name,
+          weatherTemp: response.data.main.temp,
+          weatherHumid: response.data.main.humidity,
+          weatherSpeed: response.data.wind.speed,
+          weatherUV: response2.data.current.uvi
+        }))
+
+        // places forecast data into local storage
+        localStorage.setItem('forecastData', JSON.stringify(forecasts))
       })
       .catch(err => console.error(err))
     })
