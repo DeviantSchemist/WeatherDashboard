@@ -1,8 +1,6 @@
 let weatherData = JSON.parse(localStorage.getItem('wData')) || []
 let forecastData = JSON.parse(localStorage.getItem('forecastData')) || []
 
-console.log(weatherData)
-
 if (weatherData.length == 0 && forecastData.length == 0) {
   document.getElementById('weatherData').innerHTML = 'Weather Data Displays Here'
 }
@@ -44,13 +42,16 @@ document.getElementById('searchButton').addEventListener('click', () => {
     .then(response2 => {
       axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${response.data.name}&appid=94f8ea24d2c4cd33d640135d8ee0a8d9&units=imperial`)
       .then(response3 => {
-        if (counter > 5) {
+
+        //clears list if there are already 5 cities searched
+        if (counter == 5) {
           counter = 0
           document.getElementById('list').innerHTML = ''
         }
-        document.getElementById('list').innerHTML += `
+
+        document.getElementById('list').insertAdjacentHTML('afterbegin', `
           <a href="#" class="list-group-item list-group-item-action">${document.getElementById('searchInput').value}</a>
-        `
+        `)
         counter++
 
         document.getElementById('searchInput').value = ''
