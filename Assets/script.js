@@ -133,3 +133,38 @@ document.getElementById('searchButton').addEventListener('click', () => {
   })
   .catch(err => console.error(err))
 })
+
+// event listener for list
+document.addEventListener('click', event => {
+  if (event.target.classList.contains('list-group-item')) {
+    for (let i = 0; i < listData.length; i++) {
+      if (listData[i].wData.weatherName === event.target.textContent) {
+        document.getElementById('weatherData').innerHTML = `
+          <h1>${listData[i].wData.weatherName}</h1>
+          <p>Temperature: ${listData[i].wData.weatherTemp} ℉</p>
+          <p>Humidity: ${listData[i].wData.weatherHumid}%</p>
+          <p>Wind Speed: ${listData[i].wData.weatherSpeed} MPH</p>
+          <p>UV Index: ${listData[i].wData.weatherUV}</p>
+        `
+
+        document.getElementById('forecasts').innerHTML = '<h1>5-Day Forecast</h1>'
+        listData[i].fData.forEach(forecast => {
+          document.getElementById('forecasts').innerHTML += `
+            <div class="col">
+              <div class="card text-white bg-primary mb-3">
+                <div class="card-header">${forecast.date}</div>
+                <div class="card-body">
+                  <h5 class="card-title">${forecast.weather}</h5>
+                  <h5 class="card-title">Temp: ${forecast.temp}℉</h5>
+                  <h5 class="card-title">${forecast.humidity}%</h5>
+                </div>
+              </div>
+            </div>
+          `
+        })
+
+        break
+      }
+    }
+  }
+})
