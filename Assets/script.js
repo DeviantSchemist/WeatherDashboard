@@ -34,6 +34,14 @@ if (forecastData.length != 0) {
   })
 }
 
+if (listData.length != 0) {
+  listData.forEach(listItem => {
+    document.getElementById('list').insertAdjacentHTML('afterbegin', `
+      <a href="#" class="list-group-item list-group-item-action">${listItem.wData.weatherName}</a>
+    `)
+  })
+}
+
 let counter = 0
 
 document.getElementById('searchButton').addEventListener('click', () => {
@@ -43,7 +51,6 @@ document.getElementById('searchButton').addEventListener('click', () => {
     .then(response2 => {
       axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${response.data.name}&appid=94f8ea24d2c4cd33d640135d8ee0a8d9&units=imperial`)
       .then(response3 => {
-
         //clears list if there are already 5 cities searched
         if (counter == 5) {
           counter = 0
@@ -51,7 +58,7 @@ document.getElementById('searchButton').addEventListener('click', () => {
         }
 
         document.getElementById('list').insertAdjacentHTML('afterbegin', `
-          <a href="#" class="list-group-item list-group-item-action">${document.getElementById('searchInput').value}</a>
+          <a href="#" class="list-group-item list-group-item-action">${response.data.name}</a>
         `)
         counter++
 
