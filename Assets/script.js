@@ -24,7 +24,7 @@ if (forecastData.length != 0) {
         <div class="card text-white bg-primary mb-3">
           <div class="card-header">${forecast.date}</div>
           <div class="card-body">
-            <h5 class="card-title">${forecast.weather}</h5>
+            <h5 class="card-title"><img src="${forecast.weather}" /></h5>
             <h5 class="card-title">Temp: ${forecast.temp}℉</h5>
             <h5 class="card-title">${forecast.humidity}%</h5>
           </div>
@@ -69,11 +69,18 @@ document.getElementById('searchButton').addEventListener('click', () => {
         myMaxTemp = array[0].main.temp_max
         for (let i = 1; i <= array.length; i++) {
           if (i % 8 === 0) {
+            /*
             forecasts.push({
               date: array[i - 1].dt_txt.split(' ')[0],
               weather: array[i - 1].weather[0].main,
               temp: myMaxTemp,
               humidity: array[i-1].main.humidity
+            }) */
+            forecasts.push({
+              date: array[i - 1].dt_txt.split(' ')[0],
+              weather: `http://openweathermap.org/img/wn/${array[i - 1].weather[0].icon}@2x.png`,
+              temp: myMaxTemp,
+              humidity: array[i - 1].main.humidity
             })
             myMaxTemp = 0
           }
@@ -95,7 +102,7 @@ document.getElementById('searchButton').addEventListener('click', () => {
               <div class="card text-white bg-primary mb-3">
                 <div class="card-header">${forecast.date}</div>
                 <div class="card-body">
-                  <h5 class="card-title">${forecast.weather}</h5>
+                  <h5 class="card-title"><img src="${forecast.weather}" /></h5>
                   <h5 class="card-title">Temp: ${forecast.temp}℉</h5>
                   <h5 class="card-title">${forecast.humidity}%</h5>
                 </div>
@@ -154,7 +161,7 @@ document.addEventListener('click', event => {
               <div class="card text-white bg-primary mb-3">
                 <div class="card-header">${forecast.date}</div>
                 <div class="card-body">
-                  <h5 class="card-title">${forecast.weather}</h5>
+                  <h5 class="card-title"><img src="${forecast.weather}" /></h5>
                   <h5 class="card-title">Temp: ${forecast.temp}℉</h5>
                   <h5 class="card-title">${forecast.humidity}%</h5>
                 </div>
