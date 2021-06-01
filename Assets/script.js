@@ -1,5 +1,6 @@
-let weatherData = JSON.parse(localStorage.getItem('wData')) || []
+let weatherData = JSON.parse(localStorage.getItem('weatherData')) || []
 let forecastData = JSON.parse(localStorage.getItem('forecastData')) || []
+let listData = JSON.parse(localStorage.getItem('listData')) || []
 
 if (weatherData.length == 0 && forecastData.length == 0) {
   document.getElementById('weatherData').innerHTML = 'Weather Data Displays Here'
@@ -96,17 +97,28 @@ document.getElementById('searchButton').addEventListener('click', () => {
           `
         })
 
-        //places weather data into local storage
-        localStorage.setItem('wData', JSON.stringify({
+        weatherData = {
           weatherName: response.data.name,
           weatherTemp: response.data.main.temp,
           weatherHumid: response.data.main.humidity,
           weatherSpeed: response.data.wind.speed,
           weatherUV: response2.data.current.uvi
-        }))
+        }
+
+        listData.push({
+          wData: weatherData,
+          fData: forecasts
+        })
+
+        //places weather data into local storage
+        localStorage.setItem('weatherData', JSON.stringify(weatherData))
 
         // places forecast data into local storage
         localStorage.setItem('forecastData', JSON.stringify(forecasts))
+
+        // places list items into local storage
+        localStorage.setItem('listData', JSON.stringify(listData))
+
       })
       .catch(err => console.error(err))
     })
