@@ -1,6 +1,14 @@
 # WeatherDashboard
 This application allows the user to search for a city by their name, and display weather and forecast data about it. A list of the user's search history is displayed for them beneath the search bar. Relevant weather data is displayed such as temperature, humidity, and a picture indicating the sky conditions.
 
+Having a personal weather forecast lookup application is very convenient for users who want a simple, low bloatware interface to interact with for planning trips and such. Many weather apps are part of big companies who offer streamlined UI at the price of monetary subscriptions or hiden behind numerous button presses. This is completely free and offers users the data they want with only a single click.
+
+Bootstrap is used for the formatting, and the logic was written in Javascript. It is powered by the OpenWeather API, where all of the weather data comes from.
+
+![Deployed Application](Screenshot.png)
+
+Deployed application: https://deviantschemist.github.io/WeatherDashboard/
+
 ## User Story
 
 ```
