@@ -76,6 +76,10 @@
   height: auto;
 }
 
+span {
+  color: white;
+}
+
 a:link {
   text-decoration: none
 }

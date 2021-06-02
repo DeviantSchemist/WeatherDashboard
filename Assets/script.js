@@ -13,7 +13,7 @@ if (weatherData.length != 0) {
     <p>Temperature: ${weatherData.weatherTemp} ℉</p>
     <p>Humidity: ${weatherData.weatherHumid}%</p>
     <p>Wind Speed: ${weatherData.weatherSpeed} MPH</p>
-    <p>UV Index: ${weatherData.weatherUV}</p>
+    <p>UV Index: <span id="uvIndex">${weatherData.weatherUV}</span></p>
   `
 }
 
@@ -41,6 +41,16 @@ if (listData.length != 0) {
       <a href="#" class="list-group-item list-group-item-action">${listItem.wData.weatherName}</a>
     `)
   })
+}
+
+if (parseInt(document.getElementById('uvIndex').textContent) < 9 && parseInt(document.getElementById('uvIndex').textContent) > 5) {
+  document.getElementById('uvIndex').style.backgroundColor = 'yellow'
+}
+else if (parseInt(document.getElementById('uvIndex').textContent) > 9) {
+  document.getElementById('uvIndex').style.backgroundColor = 'red'
+}
+else if (parseInt(document.getElementById('uvIndex').textContent) < 5) {
+  document.getElementById('uvIndex').style.backgroundColor = 'blue'
 }
 
 let counter = 0
@@ -90,7 +100,7 @@ document.getElementById('searchButton').addEventListener('click', () => {
           <p>Temperature: ${response.data.main.temp} ℉</p>
           <p>Humidity: ${response.data.main.humidity}%</p>
           <p>Wind Speed: ${response.data.wind.speed} MPH</p>
-          <p>UV Index: ${response2.data.current.uvi}</p>
+          <p>UV Index: <span id="uvIndex">${response2.data.current.uvi}</span></p>
         `
         forecasts.forEach(forecast => {
           document.getElementById('forecasts').innerHTML += `
@@ -150,7 +160,7 @@ document.addEventListener('click', event => {
           <p>Temperature: ${listData[i].wData.weatherTemp} ℉</p>
           <p>Humidity: ${listData[i].wData.weatherHumid}%</p>
           <p>Wind Speed: ${listData[i].wData.weatherSpeed} MPH</p>
-          <p>UV Index: ${listData[i].wData.weatherUV}</p>
+          <p>UV Index: <span id="uvIndex">${listData[i].wData.weatherUV}</span></p>
         `
 
         document.getElementById('forecasts').innerHTML = '<h1>5-Day Forecast</h1>'
