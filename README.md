@@ -1,5 +1,5 @@
 # WeatherDashboard
-
+This application allows the user to search for a city by their name, and display weather and forecast data about it. A list of the user's search history is displayed for them beneath the search bar. Relevant weather data is displayed such as temperature, humidity, and a picture indicating the sky conditions.
 
 ## User Story
 
