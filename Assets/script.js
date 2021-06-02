@@ -9,6 +9,7 @@ if (weatherData.length == 0 && forecastData.length == 0) {
 if (weatherData.length != 0) {
   document.getElementById('weatherData').innerHTML = `
     <h1>${weatherData.weatherName}</h1>
+    <img src="${weatherData.weatherImg}" alt="${weatherData.weatherAlt}"/>
     <p>Temperature: ${weatherData.weatherTemp} ℉</p>
     <p>Humidity: ${weatherData.weatherHumid}%</p>
     <p>Wind Speed: ${weatherData.weatherSpeed} MPH</p>
@@ -24,7 +25,7 @@ if (forecastData.length != 0) {
         <div class="card text-white bg-primary mb-3">
           <div class="card-header">${forecast.date}</div>
           <div class="card-body">
-            <h5 class="card-title"><img src="${forecast.weather}" /></h5>
+            <h5 class="card-title"><img src="${forecast.weather}" alt="${forecast.alt}"/></h5>
             <h5 class="card-title">Temp: ${forecast.temp}℉</h5>
             <h5 class="card-title">${forecast.humidity}%</h5>
           </div>
@@ -79,6 +80,7 @@ document.getElementById('searchButton').addEventListener('click', () => {
             forecasts.push({
               date: array[i - 1].dt_txt.split(' ')[0],
               weather: `http://openweathermap.org/img/wn/${array[i - 1].weather[0].icon}@2x.png`,
+              alt: array[i - 1].weather[0].description,
               temp: myMaxTemp,
               humidity: array[i - 1].main.humidity
             })
@@ -91,6 +93,7 @@ document.getElementById('searchButton').addEventListener('click', () => {
 
         document.getElementById('weatherData').innerHTML = `
           <h1>${response.data.name}</h1>
+          <img src="http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png" />
           <p>Temperature: ${response.data.main.temp} ℉</p>
           <p>Humidity: ${response.data.main.humidity}%</p>
           <p>Wind Speed: ${response.data.wind.speed} MPH</p>
@@ -102,7 +105,7 @@ document.getElementById('searchButton').addEventListener('click', () => {
               <div class="card text-white bg-primary mb-3">
                 <div class="card-header">${forecast.date}</div>
                 <div class="card-body">
-                  <h5 class="card-title"><img src="${forecast.weather}" /></h5>
+                  <h5 class="card-title"><img src="${forecast.weather}" alt="${forecast.alt}" /></h5>
                   <h5 class="card-title">Temp: ${forecast.temp}℉</h5>
                   <h5 class="card-title">${forecast.humidity}%</h5>
                 </div>
@@ -113,6 +116,8 @@ document.getElementById('searchButton').addEventListener('click', () => {
 
         weatherData = {
           weatherName: response.data.name,
+          weatherImg: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+          weatherAlt: response.data.weather[0].description,
           weatherTemp: response.data.main.temp,
           weatherHumid: response.data.main.humidity,
           weatherSpeed: response.data.wind.speed,
@@ -148,6 +153,7 @@ document.addEventListener('click', event => {
       if (listData[i].wData.weatherName === event.target.textContent) {
         document.getElementById('weatherData').innerHTML = `
           <h1>${listData[i].wData.weatherName}</h1>
+          <img src="${listData[i].wData.weatherImg}" alt="${listData[i].wData.weatherAlt}" />
           <p>Temperature: ${listData[i].wData.weatherTemp} ℉</p>
           <p>Humidity: ${listData[i].wData.weatherHumid}%</p>
           <p>Wind Speed: ${listData[i].wData.weatherSpeed} MPH</p>
@@ -161,7 +167,7 @@ document.addEventListener('click', event => {
               <div class="card text-white bg-primary mb-3">
                 <div class="card-header">${forecast.date}</div>
                 <div class="card-body">
-                  <h5 class="card-title"><img src="${forecast.weather}" /></h5>
+                  <h5 class="card-title"><img src="${forecast.weather}" alt="${forecast.alt}"/></h5>
                   <h5 class="card-title">Temp: ${forecast.temp}℉</h5>
                   <h5 class="card-title">${forecast.humidity}%</h5>
                 </div>
