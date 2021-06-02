@@ -1,11 +1,14 @@
+// gets data from local storage
 let weatherData = JSON.parse(localStorage.getItem('weatherData')) || []
 let forecastData = JSON.parse(localStorage.getItem('forecastData')) || []
 let listData = JSON.parse(localStorage.getItem('listData')) || []
 
+// displays placeholder text if there is no data
 if (weatherData.length == 0 && forecastData.length == 0) {
   document.getElementById('weatherData').innerHTML = 'Weather Data Displays Here'
 }
 
+// displays weather data for current day
 if (weatherData.length != 0) {
   document.getElementById('weatherData').innerHTML = `
     <h1>${weatherData.weatherName}</h1>
@@ -17,6 +20,7 @@ if (weatherData.length != 0) {
   `
 }
 
+// displays forecast data from local storage
 if (forecastData.length != 0) {
   document.getElementById('forecasts').innerHTML = '<h1>5-Day Forecast</h1>'
   forecastData.forEach(forecast => {
@@ -35,6 +39,7 @@ if (forecastData.length != 0) {
   })
 }
 
+// adds search history to list
 if (listData.length != 0) {
   listData.forEach(listItem => {
     document.getElementById('list').insertAdjacentHTML('afterbegin', `
@@ -43,6 +48,7 @@ if (listData.length != 0) {
   })
 }
 
+// changes uv index color depending on value
 if (parseInt(document.getElementById('uvIndex').textContent) < 9 && parseInt(document.getElementById('uvIndex').textContent) > 5) {
   document.getElementById('uvIndex').style.backgroundColor = 'yellow'
 }
@@ -53,8 +59,7 @@ else if (parseInt(document.getElementById('uvIndex').textContent) < 5) {
   document.getElementById('uvIndex').style.backgroundColor = 'blue'
 }
 
-let counter = 0
-
+// click event for search button
 document.getElementById('searchButton').addEventListener('click', () => {
   axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${document.getElementById('searchInput').value}&appid=94f8ea24d2c4cd33d640135d8ee0a8d9&units=imperial`)
   .then(response => {
@@ -62,22 +67,21 @@ document.getElementById('searchButton').addEventListener('click', () => {
     .then(response2 => {
       axios.get(`https://api.openweathermap.org/data/2.5/forecast?q=${response.data.name}&appid=94f8ea24d2c4cd33d640135d8ee0a8d9&units=imperial`)
       .then(response3 => {
-        //clears list if there are already 5 cities searched
-        if (counter == 5) {
-          counter = 0
-          document.getElementById('list').innerHTML = ''
-        }
-
+        // inserts list item to list
         document.getElementById('list').insertAdjacentHTML('afterbegin', `
           <a href="#" class="list-group-item list-group-item-action">${response.data.name}</a>
         `)
-        counter++
 
+        // clears search bar after usser presses search button
         document.getElementById('searchInput').value = ''
+
+        // displays forecast data
         document.getElementById('forecasts').innerHTML = '<h1>5-Day Forecast</h1>'
         let array = response3.data.list //array of 40 forecasts, each with a 3 hour interval
         let myMaxTemp, forecasts = []
         myMaxTemp = array[0].main.temp_max
+
+        // adds a forecast to the forecasts array
         for (let i = 1; i <= array.length; i++) {
           if (i % 8 === 0) {
             forecasts.push({
@@ -94,6 +98,7 @@ document.getElementById('searchButton').addEventListener('click', () => {
           }
         }
 
+        // displays weather data from user search
         document.getElementById('weatherData').innerHTML = `
           <h1>${response.data.name}</h1>
           <img src="http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png" />
@@ -102,6 +107,7 @@ document.getElementById('searchButton').addEventListener('click', () => {
           <p>Wind Speed: ${response.data.wind.speed} MPH</p>
           <p>UV Index: <span id="uvIndex">${response2.data.current.uvi}</span></p>
         `
+        // displays forecast data from user search
         forecasts.forEach(forecast => {
           document.getElementById('forecasts').innerHTML += `
             <div class="col">
@@ -117,6 +123,7 @@ document.getElementById('searchButton').addEventListener('click', () => {
           `
         })
 
+        // loads weather data for local storage
         weatherData = {
           weatherName: response.data.name,
           weatherImg: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
@@ -127,6 +134,7 @@ document.getElementById('searchButton').addEventListener('click', () => {
           weatherUV: response2.data.current.uvi
         }
 
+        // object used for local storage
         listData.push({
           wData: weatherData,
           fData: forecasts
@@ -149,11 +157,12 @@ document.getElementById('searchButton').addEventListener('click', () => {
   .catch(err => console.error(err))
 })
 
-// event listener for list
+// event listener for list item clicks
 document.addEventListener('click', event => {
   if (event.target.classList.contains('list-group-item')) {
     for (let i = 0; i < listData.length; i++) {
       if (listData[i].wData.weatherName === event.target.textContent) {
+        // display weather data for list item
         document.getElementById('weatherData').innerHTML = `
           <h1>${listData[i].wData.weatherName}</h1>
           <img src="${listData[i].wData.weatherImg}" alt="${listData[i].wData.weatherAlt}" />
@@ -162,7 +171,7 @@ document.addEventListener('click', event => {
           <p>Wind Speed: ${listData[i].wData.weatherSpeed} MPH</p>
           <p>UV Index: <span id="uvIndex">${listData[i].wData.weatherUV}</span></p>
         `
-
+        // display forecast data for list item
         document.getElementById('forecasts').innerHTML = '<h1>5-Day Forecast</h1>'
         listData[i].fData.forEach(forecast => {
           document.getElementById('forecasts').innerHTML += `
@@ -178,7 +187,6 @@ document.addEventListener('click', event => {
             </div>
           `
         })
-
         break
       }
     }

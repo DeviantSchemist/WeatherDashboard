@@ -1,9 +1,13 @@
+/* styles the top banner */
+
 .banner {
   color: white;
   text-align: center;
   background-color: black;
   font-size: 400%;
 }
+
+/* styles the search bar area */
 
 .search {
   width: 100%;
@@ -14,6 +18,8 @@
   padding: 10px;
   border-radius: 5px
 }
+
+/* styles the actual search bar */
 
 .search-input {
   color: white;
@@ -27,6 +33,7 @@
   transition: width 0.4s linear
 }
 
+/* styles the actual search bar */
 .search .search-input {
   padding: 0 10px;
   width: 100%;
@@ -42,6 +49,7 @@
   -o-transition: width 0.4s linear;
 }
 
+/* styles the search icon */
 .search-icon {
   height: 34px;
   width: 34px;
@@ -57,29 +65,30 @@
   border-radius: 5px
 }
 
+/* styles search icon for hovering */
 .search-icon:hover {
   color: #fff !important
 }
 
+/* styles search text */
 .search>h1 {
   font-size: 130%;
   font-weight: bolder;
   margin-top: -4%;
 }
 
-.weatherData > h1 {
-  display: inline;
-}
-
+/* styles weather image for current day */
 .weatherData img {
   width: 20%;
   height: auto;
 }
 
+/* styles span font color */
 span {
   color: white;
 }
 
+/* gets rid of underline for list items */
 a:link {
   text-decoration: none
 }
