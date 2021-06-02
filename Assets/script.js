@@ -63,7 +63,7 @@ if (document.getElementById('uvIndex') != null) {
 
 // click event for search button
 document.getElementById('searchButton').addEventListener('click', () => {
-  axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${document.getElementById('searchInput').value}&appid=94f8ea24d2c4cd33d640135d8ee0a8d9&units=imperial`)
+  axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${document.getElementById('searchInput').value}&appid=94f8ea24d2c4cd33d640135d8ee0a8d9&units=imperial`)
   .then(response => {
     axios.get(`https://api.openweathermap.org/data/2.5/onecall?lat=${response.data.coord.lat}&lon=${response.data.coord.lon}&exclude=minutely,hourly,daily,alerts&appid=94f8ea24d2c4cd33d640135d8ee0a8d9&units=imperial`)
     .then(response2 => {
@@ -88,7 +88,7 @@ document.getElementById('searchButton').addEventListener('click', () => {
           if (i % 8 === 0) {
             forecasts.push({
               date: array[i - 1].dt_txt.split(' ')[0],
-              weather: `http://openweathermap.org/img/wn/${array[i - 1].weather[0].icon}@2x.png`,
+              weather: `https://openweathermap.org/img/wn/${array[i - 1].weather[0].icon}@2x.png`,
               alt: array[i - 1].weather[0].description,
               temp: myMaxTemp,
               humidity: array[i - 1].main.humidity
@@ -103,7 +103,7 @@ document.getElementById('searchButton').addEventListener('click', () => {
         // displays weather data from user search
         document.getElementById('weatherData').innerHTML = `
           <h1>${response.data.name}</h1>
-          <img src="http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png" />
+          <img src="https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png" />
           <p>Temperature: ${response.data.main.temp} ℉</p>
           <p>Humidity: ${response.data.main.humidity}%</p>
           <p>Wind Speed: ${response.data.wind.speed} MPH</p>
@@ -128,7 +128,7 @@ document.getElementById('searchButton').addEventListener('click', () => {
         // loads weather data for local storage
         weatherData = {
           weatherName: response.data.name,
-          weatherImg: `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
+          weatherImg: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
           weatherAlt: response.data.weather[0].description,
           weatherTemp: response.data.main.temp,
           weatherHumid: response.data.main.humidity,
