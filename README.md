@@ -5,7 +5,7 @@ Having a personal weather forecast lookup application is very convenient for use
 
 Bootstrap is used for the formatting, and the logic was written in Javascript. It is powered by the OpenWeather API, where all of the weather data comes from.
 
-![Deployed Application](Screenshot.png)
+![Deployed Application](Assets/Screenshot.png)
 
 Deployed application: https://deviantschemist.github.io/WeatherDashboard/
 
