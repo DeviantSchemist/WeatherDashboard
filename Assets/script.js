@@ -49,14 +49,16 @@ if (listData.length != 0) {
 }
 
 // changes uv index color depending on value
-if (parseInt(document.getElementById('uvIndex').textContent) < 9 && parseInt(document.getElementById('uvIndex').textContent) > 5) {
-  document.getElementById('uvIndex').style.backgroundColor = 'yellow'
-}
-else if (parseInt(document.getElementById('uvIndex').textContent) > 9) {
-  document.getElementById('uvIndex').style.backgroundColor = 'red'
-}
-else if (parseInt(document.getElementById('uvIndex').textContent) < 5) {
-  document.getElementById('uvIndex').style.backgroundColor = 'blue'
+if (document.getElementById('uvIndex') != null) {
+  if (parseInt(document.getElementById('uvIndex').textContent) < 9 && parseInt(document.getElementById('uvIndex').textContent) > 5) {
+    document.getElementById('uvIndex').style.backgroundColor = 'yellow'
+  }
+  else if (parseInt(document.getElementById('uvIndex').textContent) > 9) {
+    document.getElementById('uvIndex').style.backgroundColor = 'red'
+  }
+  else if (parseInt(document.getElementById('uvIndex').textContent) < 5) {
+    document.getElementById('uvIndex').style.backgroundColor = 'blue'
+  }
 }
 
 // click event for search button
