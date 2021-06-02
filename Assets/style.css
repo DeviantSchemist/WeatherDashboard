@@ -67,7 +67,14 @@
   margin-top: -4%;
 }
 
+.weatherData > h1 {
+  display: inline;
+}
 
+.weatherData img {
+  width: 20%;
+  height: auto;
+}
 
 a:link {
   text-decoration: none
