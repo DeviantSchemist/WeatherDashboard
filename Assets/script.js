@@ -70,13 +70,6 @@ document.getElementById('searchButton').addEventListener('click', () => {
         myMaxTemp = array[0].main.temp_max
         for (let i = 1; i <= array.length; i++) {
           if (i % 8 === 0) {
-            /*
-            forecasts.push({
-              date: array[i - 1].dt_txt.split(' ')[0],
-              weather: array[i - 1].weather[0].main,
-              temp: myMaxTemp,
-              humidity: array[i-1].main.humidity
-            }) */
             forecasts.push({
               date: array[i - 1].dt_txt.split(' ')[0],
               weather: `http://openweathermap.org/img/wn/${array[i - 1].weather[0].icon}@2x.png`,
