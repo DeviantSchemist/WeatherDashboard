@@ -31,7 +31,7 @@ if (forecastData.length != 0) {
           <div class="card-body">
             <h5 class="card-title"><img src="${forecast.weather}" alt="${forecast.alt}"/></h5>
             <h5 class="card-title">Temp: ${forecast.temp}℉</h5>
-            <h5 class="card-title">${forecast.humidity}%</h5>
+            <h5 class="card-title">Humidity: ${forecast.humidity}%</h5>
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@ if (listData.length != 0) {
     `)
   })
 }
-
+/*
 // changes uv index color depending on value
 if (document.getElementById('uvIndex') != null) {
   if (parseInt(document.getElementById('uvIndex').textContent) < 9 && parseInt(document.getElementById('uvIndex').textContent) > 5) {
@@ -59,7 +59,7 @@ if (document.getElementById('uvIndex') != null) {
   else if (parseInt(document.getElementById('uvIndex').textContent) < 5) {
     document.getElementById('uvIndex').style.backgroundColor = 'blue'
   }
-}
+} */
 
 // click event for search button
 document.getElementById('searchButton').addEventListener('click', () => {
@@ -118,7 +118,7 @@ document.getElementById('searchButton').addEventListener('click', () => {
                 <div class="card-body">
                   <h5 class="card-title"><img src="${forecast.weather}" alt="${forecast.alt}" /></h5>
                   <h5 class="card-title">Temp: ${forecast.temp}℉</h5>
-                  <h5 class="card-title">${forecast.humidity}%</h5>
+                  <h5 class="card-title">Humidity: ${forecast.humidity}%</h5>
                 </div>
               </div>
             </div>
@@ -183,7 +183,7 @@ document.addEventListener('click', event => {
                 <div class="card-body">
                   <h5 class="card-title"><img src="${forecast.weather}" alt="${forecast.alt}"/></h5>
                   <h5 class="card-title">Temp: ${forecast.temp}℉</h5>
-                  <h5 class="card-title">${forecast.humidity}%</h5>
+                  <h5 class="card-title">Humidity: ${forecast.humidity}%</h5>
                 </div>
               </div>
             </div>
@@ -193,4 +193,31 @@ document.addEventListener('click', event => {
       }
     }
   }
+
+  // changes uv index color depending on value
+  if (document.getElementById('uvIndex') != null) {
+    if (parseInt(document.getElementById('uvIndex').textContent) < 9 && parseInt(document.getElementById('uvIndex').textContent) > 5) {
+      document.getElementById('uvIndex').style.backgroundColor = 'yellow'
+    }
+    else if (parseInt(document.getElementById('uvIndex').textContent) > 9) {
+      document.getElementById('uvIndex').style.backgroundColor = 'red'
+    }
+    else if (parseInt(document.getElementById('uvIndex').textContent) < 5) {
+      document.getElementById('uvIndex').style.backgroundColor = 'blue'
+    }
+  }
+
 })
+
+// changes uv index color depending on value
+if (document.getElementById('uvIndex') != null) {
+  if (parseInt(document.getElementById('uvIndex').textContent) < 9 && parseInt(document.getElementById('uvIndex').textContent) > 5) {
+    document.getElementById('uvIndex').style.backgroundColor = 'yellow'
+  }
+  else if (parseInt(document.getElementById('uvIndex').textContent) > 9) {
+    document.getElementById('uvIndex').style.backgroundColor = 'red'
+  }
+  else if (parseInt(document.getElementById('uvIndex').textContent) < 5) {
+    document.getElementById('uvIndex').style.backgroundColor = 'blue'
+  }
+}
